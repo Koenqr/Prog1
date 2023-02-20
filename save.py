@@ -21,6 +21,12 @@ def save(): #save the current save data
 def load(): #load the current save data
 	global save_data
 	save_data = import_xml(open(path+"/save.xml", "r").read())
+ 
+def createProfile(name,playerName,difficulty): #create a new profile
+	save_data[name]={
+		playerName:playerName,
+		difficulty:difficulty 
+	 }
 	
 	
 

@@ -153,7 +153,7 @@ finalTime=time()
 print("numpy took " + str(finalTime-intialTime) + " seconds to sum 1 million numbers, which btw was " + str(npSum))
 nptime=finalTime-intialTime
 
-#print("numpy was " + str(ptime/nptime) + " times faster than python")
+print("numpy was " + str(ptime/nptime) + " times faster than python")
 
 #4.6
 odds=list(range(1,21,2))
