@@ -162,3 +162,150 @@ for i in range(10):
 
 #9.15
 #refrence datetime & time modules from PyAlarm.py (STACK)
+
+
+#10.5 to 10.12
+
+#10.5
+
+#import filesystem, check if file exists, if not create it then start storing answers in it until user enters 'quit'
+
+import os
+
+filename = 'poll.txt'
+
+if os.path.exists(filename):
+    print("enter responses")
+else:
+    open(filename, 'w')
+    print("file created, enter responses")
+    
+while True:
+    f=open(filename, 'a')
+    i=input("why do you like programming? ")
+    if i == 'quit':
+        f.close()
+        break
+    f.write(i+"\n")
+    
+    
+#10.6
+print("enter two numbers to add")
+i1=input("first number: ")
+i2=input("second number: ")
+
+try :
+    i1=int(i1)
+    i2=int(i2)
+except ValueError:
+    print("please enter a number with numbers not letters")
+else:
+    print(i1+i2)
+
+    
+    
+#10.7
+while True:
+    i1=input("first number: ")
+    if i1 == 'quit': break
+    i2=input("second number: ")
+    if i2 == 'quit': break
+    
+    try :
+        i1=int(i1)
+        i2=int(i2)
+    except ValueError:
+        print("please enter a number with numbers not letters")
+    else:
+        print(i1+i2)
+
+    
+#10.8
+open('cats.txt', 'w').write("cat1\ncat2\ncat3")
+open('dogs.txt', 'w').write("dog1\ndog2\ndog3")
+
+def print_file(filename):
+    try:
+        f=open(filename, 'r')
+    except FileNotFoundError:
+        print("file not found")
+    else:
+        for line in f:
+            print(line)
+        f.close()
+
+print_file('cats.txt')
+print_file('dogs.txt')
+
+
+#10.9
+#just remove the print statement in the except block......
+
+
+#10.10
+def countString(filename, string, encoding='utf-8'):
+    try:
+        f=open(filename, 'r', encoding=encoding)
+    except FileNotFoundError:
+        print("file not found")
+    except UnicodeDecodeError:
+        print("file is not in "+encoding+" encoding, try another encoding")
+    else:
+        count=0
+        for line in f:
+            count+=line.lower().count(string)
+        print("the string "+string+" is found "+str(count)+" times in the file "+filename)
+        f.close()
+        
+        
+countString('book.txt', 'the')
+
+#10.11
+import json
+file="fav_number.json"
+
+i=input("what is your favorite number? ")
+
+#import seperate_file.py and def as function
+with open(file, 'w') as f:
+    json.dump(i, f)
+
+
+with open(file) as f:
+    fav_number=json.load(f)
+    print("your favorite number is "+str(fav_number))
+        
+        
+        
+#10.12
+
+
+#zie 10-11
+
+#11.1
+
+import unittest
+import cityFunctions as cf
+
+class testCityNames(unittest.TestCase):
+
+    def test_cityName(self): #will fail due to 11.2
+        expect="Amsterdam, Netherlands"
+        inputData=["amsterdam","netherlands"]
+        
+        output=cf.formatCityName(*inputData)
+        
+        self.assertEqual(output,expect)
+        
+        
+    def test_cityWithPopulation(self): #11.2
+        expect="Amsterdam, Netherlands - 1000000"
+        inputData=["amsterdam","netherlands",1000000]
+        
+        output=cf.formatCityName(*inputData)
+        
+        self.assertEqual(output,expect)
+        
+        
+unittest.main()
+
